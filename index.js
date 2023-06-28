@@ -2,9 +2,8 @@
 const colorForm = document.getElementById("color-form")
 const colorContainer = document.getElementById("color-container")
 
-// FORM EVENT LISTENER
-colorForm.addEventListener("submit", function(e){
-    e.preventDefault()
+// RENDER FUNCTION
+function renderColorScheme(){
     const color = document.getElementById("color-selector").value.substring(1)
     const mode = document.getElementById("mode-selector").value
     
@@ -14,11 +13,11 @@ colorForm.addEventListener("submit", function(e){
             const html = data.colors.map((color)=>{
                 return `
                     <div class="color-card">
-                        <img 
+                        <img
                             class="color-img" 
                             data-hex=${color.hex.value} 
-                            src="${color.image.bare}">
-                        </img>
+                            src="${color.image.bare}"
+                        />
                         <p class="color-value" data-hex=${color.hex.value}>
                             ${color.hex.value}
                         </p>
@@ -26,7 +25,14 @@ colorForm.addEventListener("submit", function(e){
                 `
             }).join("")
             colorContainer.innerHTML = html
-        })
+        }) 
+}
+renderColorScheme()
+
+// FORM EVENT LISTENER
+colorForm.addEventListener("submit", function(e){
+    e.preventDefault()
+    renderColorScheme()
 })
 
 // COPY COLOR
